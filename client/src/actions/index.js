@@ -40,8 +40,8 @@ export const fileUpload = value => async dispatch => {
     productId: value.productId
   });
 
-  history.push("/");
   dispatch({ type: FILE_UPLOAD, payload: res.data });
+  history.push("/dashboard");
 };
 
 export const getImages = () => async dispatch => {

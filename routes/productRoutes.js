@@ -41,12 +41,13 @@ module.exports = app => {
 
   app.post("/fetch_products", async (req, res) => {
     const { user_id } = req.body;
-    console.log(req.body);
     try {
       const product = await Product.find({
         user_id
       });
-      console.log(product);
+      if (product.constructor !== Array) {
+        product = [product];
+      }
       res.send(product);
     } catch (e) {
       res.send(e);

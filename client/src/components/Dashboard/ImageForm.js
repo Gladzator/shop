@@ -9,9 +9,7 @@ class ImageForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   state = { file: { name: null } };
-  componentDidMount() {
-    this.props.getImages();
-  }
+
   onChange = e => {
     this.setState({ file: e.target.files[0] });
   };
@@ -26,15 +24,7 @@ class ImageForm extends Component {
       productId: this.props.file._id
     });
   }
-  renderImages() {
-    return this.props.file.map(file => {
-      return (
-        <div key={`${file.filename}`}>
-          {file.isImage && <img alt="" src={`image/${file.filename}`} />}
-        </div>
-      );
-    });
-  }
+
   render() {
     return (
       <div className="container">
@@ -57,6 +47,7 @@ class ImageForm extends Component {
 }
 
 function mapStateToProps({ file, auth }) {
+  console.log(file);
   return { file, auth };
 }
 

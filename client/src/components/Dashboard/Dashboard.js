@@ -8,17 +8,25 @@ class Dashboard extends Component {
     super(props);
     this.state = { file: props.file };
   }
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.auth != null) {
       this.props.fetchProducts({ user_id: this.props.auth._id });
     }
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.file === this.props.file || this.props.auth != null) {
+    if (prevProps.file === this.props.file) {
+      console.log("hi");
       this.props.fetchProducts({ user_id: this.props.auth._id });
     }
   }
   renderImages = () => {
+    if (this.props.file.constructor !== Array) {
+      return (
+        <div key={`${this.props.file.productimage}`}>
+          {<img alt="" src={`image/${this.props.file.productimage}`} />}
+        </div>
+      );
+    }
     return this.props.file.map(file => {
       return (
         <div key={`${file.productimage}`}>
@@ -38,6 +46,7 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps({ file, auth }) {
+  console.log(file);
   return { file: file === null ? [] : file, auth };
 }
 

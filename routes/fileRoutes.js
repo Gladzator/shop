@@ -11,7 +11,6 @@ module.exports = app => {
       { $set: { productimage: imageName } },
       { new: true }
     );
-    console.log(product);
     res.send(product);
   });
 };
